@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Exo_1.Models
 {
@@ -17,8 +18,11 @@ namespace Exo_1.Models
             set
             {
                 DateTime maintenant = DateTime.Now;
-                DateTime dateTest = maintenant.AddYears(-18);
                 // contrôle si majeur
+                if ((maintenant.Year - 18) >= value.Year)
+                {
+                    Console.WriteLine("Vous êtes majeur");
+                }
 
             }
         }
