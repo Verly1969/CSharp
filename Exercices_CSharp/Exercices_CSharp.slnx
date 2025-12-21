@@ -2,4 +2,7 @@
   <Folder Name="/Exo_1_Class/">
     <Project Path="Exo_1/Exo_1.csproj" />
   </Folder>
+  <Folder Name="/Exo_2_Indexeur/">
+    <Project Path="Exo_2/Exo_2.csproj" Id="d3a6b26e-1fde-4f5d-aac0-c6f8efb49968" />
+  </Folder>
 </Solution>
