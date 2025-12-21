@@ -1,6 +1,4 @@
-﻿using Exo_1.Enums;
-using Exo_1.Structures;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +6,6 @@ namespace Exo_1.Models
 {
     internal class Courant
     {
-        private Messages amountSup = Messages.AMOUNT_SUP_ZERO;
         public string Numero { get; set; } = string.Empty;
         public double Solde { get; private set; }
         public required Personne Titulaire { get; set; }
@@ -37,7 +34,7 @@ namespace Exo_1.Models
             // check if the amount can be debited
             while (montant > (Solde + _ligneDeCredit))
             {
-                
+                Console.WriteLine("Le montant du retrait est trop élevé");
             }
         }
 
@@ -49,9 +46,14 @@ namespace Exo_1.Models
         {
             do
             {
-                DisplayMessages.
+                Console.WriteLine("Le montant doit être supérieur à 0");
             }
             while (montant <= 0);
+        }
+
+        public override string ToString()
+        {
+            return $"\nTitulaire: {Titulaire}\nNuméro: {Numero}\nLigne de crédit: {LigneDeCredit} euros\nSolde: {Solde} euros\n";
         }
     }
 }

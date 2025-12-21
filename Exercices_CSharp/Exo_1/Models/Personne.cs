@@ -26,5 +26,10 @@ namespace Exo_1.Models
 
             }
         }
+
+        public override string ToString()
+        {
+            return $"{Nom} {Prenom}";
+        }
     }
 }
