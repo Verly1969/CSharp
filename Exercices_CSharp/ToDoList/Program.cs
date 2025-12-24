@@ -1,2 +1,8 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using ToDoList.Models;
+
+
+
+Menu menu = new Menu();
+menu.AfficheMenu();
+
+
