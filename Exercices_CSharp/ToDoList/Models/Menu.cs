@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ToDoList.Structures;
 
 namespace ToDoList.Models
 {
@@ -32,10 +31,16 @@ namespace ToDoList.Models
                     /*System.Environment.Exit(0);*/
                     break;
                 case 1:
-                    Console.WriteLine("Afficher toutes les tâches");
+                    Console.WriteLine(tache.AfficherToutesLesTaches());
                     break;
                 case 2:
+                    Console.Clear();
                     Console.WriteLine("Ajouter une nouvelle tâche");
+                    tache.AjouterTache();
+                    Console.WriteLine("\nTapez sur une touche pour continuer\n");
+                    Console.ReadLine();
+                    Console.Clear() ;
+                    AfficheMenu();
                     break;
                 case 3:
                     Console.WriteLine("Modifier le statut d'une tâche");
@@ -50,9 +55,10 @@ namespace ToDoList.Models
                     Console.WriteLine("Afficher les statistiques");
                     break;
                 default:
-                    Console.WriteLine("Le numéro ne correspond pas au menu");
-                    Console.Clear();
                     Console.Beep();
+                    Console.WriteLine("Le numéro ne correspond pas au menu");
+                    Console.WriteLine("Pour continuer, tapez sur une touche ...");
+                    Console.ReadLine();
                     Console.Clear();
                     AfficheMenu();
                     break;
