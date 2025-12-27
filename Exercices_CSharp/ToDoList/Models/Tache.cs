@@ -5,37 +5,37 @@ using ToDoList.Enums;
 
 namespace ToDoList.Models
 {
-    internal class Tache
+    public class Tache
     {
         private Dictionary<int, Tache> _taches = new Dictionary<int, Tache>();
 
         private int Number = 0;
-        private string Titre = string.Empty;
+        private string? Titre = null;
         private string Description = string.Empty;
 
         private StatutTache Statut;
         private DateTime DateCreation;
 
-        private Menu menu = new Menu();
-
         public string AfficherToutesLesTaches()
         {
             string str = "";
+            Console.Clear();
+            Console.WriteLine("\nListe des tâches:");
+            Console.WriteLine("=================");
             if (_taches.Count > 0)
             {
                 foreach (KeyValuePair<int, Tache> tache in _taches)
                 {
-                    str += $"\n[{tache.Key}] Titre: {tache.Value.Titre}\n" +
+                    str += $"[{tache.Key}] Titre: {tache.Value.Titre}\n" +
                         $"\tDescription: {tache.Value.Description}\n" +
                         $"\tStatut: {tache.Value.Statut}\n" +
-                        $"\tCréé le: {tache.Value.DateCreation}";
+                        $"\tCréé le: {tache.Value.DateCreation}\n";
                 }
             }
             else
             {
-                AfficheMessage("Aucune tâche dans la liste ...");
+                AfficheMessage("\nAucune tâche dans la liste ...\n");
                 Console.Clear();
-                menu.AfficheMenu();
             }
 
             return str;
@@ -44,20 +44,32 @@ namespace ToDoList.Models
 
         public void AjouterTache()
         {
-            Tache tache = new Tache();
-            tache.Number = Number += 1;
+            /*Tache tache = new Tache();*/
+            Number++;
             do
             {
                 Console.WriteLine("Veuillez entrer un titre pour la tâche à faire enregistrer:");
-                tache.Titre = Console.ReadLine()!;
-            } while (Console.ReadLine() == null);
+                Titre = Console.ReadLine()!;
+            } while (Titre == null || Titre == "");
 
             Console.WriteLine("Veuillez entrer une description (facultative)");
-            tache.Description = Console.ReadLine() ?? "Pas de description";
-            tache.Statut = StatutTache.EnAttente;
-            tache.DateCreation = DateTime.Now;
-            _taches.Add(tache.Number, tache);
-            AfficheMessage($"Vous avez ajouter la tâche: {tache.Titre}\n");
+            Description = Console.ReadLine() ?? "Pas de description";
+            Statut = StatutTache.EnAttente;
+            DateCreation = DateTime.Now;
+            _taches.Add(Number, new Tache{ Titre = Titre, Description = Description, Statut = Statut, DateCreation = DateCreation});
+            AfficheMessage($"Vous avez ajouter la tâche: {Titre}\n");
+        }
+
+        public void AjouterTache(string titre, string description)
+        {
+            /*Tache tache = new Tache();*/
+            Number++;
+            Titre = titre;
+            Description = description;
+            Statut = StatutTache.EnAttente;
+            DateCreation = DateTime.Now;
+            _taches.Add(Number, new Tache { Titre = Titre, Description = Description, Statut = Statut, DateCreation = DateCreation });
+            Console.WriteLine($"La tâche {Titre} a été ajouté ...");
         }
 
         public void AfficheMessage(string message)

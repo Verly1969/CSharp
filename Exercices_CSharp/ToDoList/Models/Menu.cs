@@ -4,11 +4,17 @@ using System.Text;
 
 namespace ToDoList.Models
 {
-    internal struct Menu
+    internal class Menu : Tache
     {
+        public void AjouterPlusieuresTaches()
+        {
+            AjouterTache("Sel", "Sel pour Sombreffe");
+            AjouterTache("Boules", "Support pour accrocher les boules au sapin");
+            AjouterTache("C T", "Aller au contrôle technique avec l'A5");
+        }
         internal void AfficheMenu()
         {
-            Tache tache = new Tache();
+            /*Tache tache = new Tache();*/
             int result = 0;
             do
             {
@@ -28,31 +34,34 @@ namespace ToDoList.Models
             {
                 case 0:
                     Console.WriteLine("\n\tFermeture de l'application\n");
-                    /*System.Environment.Exit(0);*/
                     break;
                 case 1:
-                    Console.WriteLine(tache.AfficherToutesLesTaches());
+                    Console.WriteLine(AfficherToutesLesTaches());
+                    AfficheMenu();
                     break;
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Ajouter une nouvelle tâche");
-                    tache.AjouterTache();
-                    Console.WriteLine("\nTapez sur une touche pour continuer\n");
-                    Console.ReadLine();
+                    Console.WriteLine("==========================\n");
+                    AjouterTache();
                     Console.Clear() ;
                     AfficheMenu();
                     break;
                 case 3:
                     Console.WriteLine("Modifier le statut d'une tâche");
+                    Console.WriteLine("==============================\n");
                     break;
                 case 4:
                     Console.WriteLine("Supprimer une tâche");
+                    Console.WriteLine("===================");
                     break;
                 case 5:
                     Console.WriteLine("Rechercher une tâche");
+                    Console.WriteLine("====================");
                     break;
                 case 6:
                     Console.WriteLine("Afficher les statistiques");
+                    Console.WriteLine("=========================");
                     break;
                 default:
                     Console.Beep();
