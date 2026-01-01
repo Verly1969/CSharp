@@ -51,6 +51,8 @@ namespace ToDoList.Models
                 case 3:
                     Console.WriteLine("Modifier le statut d'une tâche");
                     Console.WriteLine("==============================\n");
+                    tache.ModifierStatut();
+                    AfficheMenu();
                     break;
                 case 4:
                     Console.WriteLine("Supprimer une tâche");

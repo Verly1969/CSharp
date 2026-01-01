@@ -100,5 +100,92 @@ namespace ToDoList.Models
             Console.WriteLine("Pour continuer, tapez sur une touche ...");
             Console.ReadLine();
         }
+
+        public void ModifierStatut()
+        {
+            AfficherTaches();
+
+            // Sélection de la tâche a modifier
+            int result = 0;
+            int cpt = 0;
+            do
+            {
+                do
+                {
+                    Console.WriteLine("Indiquez le numéro de la tâche a modifier");
+                    if (cpt > 0)
+                    {
+                        Console.WriteLine("La donnée entrée n'est pas correcte, vous devez entrer un numéro\n");
+                    }
+                    cpt++;
+                } while (!int.TryParse(Console.ReadLine(), out result));
+            } while (result <= 0 || result > _taches.Count);
+
+            // Afficher la liste des statuts
+            foreach (int i in Enum.GetValues<StatutTache>().Select(v => (int)v))
+            {
+                switch (i)
+                {
+                    case 0:
+                        {
+                            Console.WriteLine($"{i} {StatutTache.EnAttente}");
+                            break;
+                        }
+                    case 1:
+                        {
+                            Console.WriteLine($"{i} {StatutTache.EnCours}");
+                            break;
+                        }
+                    case 2:
+                        {
+                            Console.WriteLine($"{i} {StatutTache.Terminee}");
+                            break;
+                        }
+                }
+            }
+
+            // Sélection du statut a appliquer
+            cpt = 0;
+            int statut;
+            do
+            {
+                do
+                {
+                    Console.WriteLine("Indiquez le numéro du statut a appliquer");
+                    if (cpt > 0)
+                    {
+                        Console.WriteLine("La donnée entrée n'est pas correcte, vous devez entrer un numéro\n");
+                    }
+                    cpt++;
+                } while (!int.TryParse(Console.ReadLine(), out statut));
+            } while (statut < 0 || statut > 2);
+
+            // Modification du statut sur la tâche
+            if (_taches.TryGetValue(result, out Tache? value))
+            {
+                switch (statut)
+                {
+                    case 0:
+                        {
+                            value._statut = StatutTache.EnAttente;
+                            break;
+                        }
+                    case 1:
+                        {
+                            value._statut = StatutTache.EnCours;
+                            break;
+                        }
+                    case 2:
+                        {
+                            value._statut = StatutTache.Terminee;
+                            break;
+                        }
+                }
+                
+            }
+            Console.WriteLine($"Le statut de la tâche numéro {result} à bien été modifiée.");
+            Console.WriteLine("Pour continuer, tapez sur une touche ...");
+            Console.ReadLine();
+        }
     }
 }
