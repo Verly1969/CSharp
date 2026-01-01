@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ToDoList.Enums
 {
-    internal enum StatutTache
+    public enum StatutTache
     {
         EnAttente,
         EnCours,

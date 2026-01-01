@@ -4,20 +4,20 @@ using System.Text;
 
 namespace ToDoList.Models
 {
-    internal class Menu : Tache
+    public struct Menu
     {
-        public void AjouterPlusieuresTaches()
+        Tache tache = new Tache();
+
+        public Menu()
         {
-            AjouterTache("Sel", "Sel pour Sombreffe");
-            AjouterTache("Boules", "Support pour accrocher les boules au sapin");
-            AjouterTache("C T", "Aller au contrôle technique avec l'A5");
         }
-        internal void AfficheMenu()
+
+        public void AfficheMenu()
         {
-            /*Tache tache = new Tache();*/
             int result = 0;
             do
             {
+                Console.Clear();
                 Console.WriteLine(" === GESTIONNAIRE DE TACHES ===\n" +
                 " 1 . Afficher toutes les tâches\n" +
                 " 2 . Ajouter une nouvelle tâche\n" +
@@ -36,15 +36,16 @@ namespace ToDoList.Models
                     Console.WriteLine("\n\tFermeture de l'application\n");
                     break;
                 case 1:
-                    Console.WriteLine(AfficherToutesLesTaches());
+                    tache.AfficherTaches();
+                    Console.WriteLine("Pour continuer, tapez sur une touche ...");
+                    Console.ReadLine();
                     AfficheMenu();
                     break;
                 case 2:
                     Console.Clear();
                     Console.WriteLine("Ajouter une nouvelle tâche");
                     Console.WriteLine("==========================\n");
-                    AjouterTache();
-                    Console.Clear() ;
+                    tache.AjouterTache();
                     AfficheMenu();
                     break;
                 case 3:
@@ -54,6 +55,8 @@ namespace ToDoList.Models
                 case 4:
                     Console.WriteLine("Supprimer une tâche");
                     Console.WriteLine("===================");
+                    tache.SupprimerTache();
+                    AfficheMenu();
                     break;
                 case 5:
                     Console.WriteLine("Rechercher une tâche");
@@ -68,7 +71,6 @@ namespace ToDoList.Models
                     Console.WriteLine("Le numéro ne correspond pas au menu");
                     Console.WriteLine("Pour continuer, tapez sur une touche ...");
                     Console.ReadLine();
-                    Console.Clear();
                     AfficheMenu();
                     break;
 
