@@ -94,9 +94,23 @@ namespace ToDoList.Models
                     cpt++;
                 } while (!int.TryParse(Console.ReadLine(), out result));
             } while (result <= 0 || result > _taches.Count);
+            
+            // Comfirmation
+            int comfirm = 0;
+            do
+            {
+                Console.WriteLine($"Vous allez supprimer la tâche {result} ?\nTapez 1 pour continuer\nTapez 0 pour annuler\n");
+            } while (!int.TryParse(Console.ReadLine(), out comfirm) || comfirm < 0 || comfirm > 1);
 
-            _taches.Remove(result);
-            Console.WriteLine($"La tâche numéro {result} à bien été supprimée.");
+            if (comfirm == 1)
+            {
+                _taches.Remove(result);
+                Console.WriteLine($"La tâche numéro {result} à bien été supprimée.");
+            }
+            else
+            {
+                Console.WriteLine("Opération de suppression annulée");
+            }
             Console.WriteLine("Pour continuer, tapez sur une touche ...");
             Console.ReadLine();
         }
@@ -128,17 +142,17 @@ namespace ToDoList.Models
                 {
                     case 0:
                         {
-                            Console.WriteLine($"{i} {StatutTache.EnAttente}");
+                            Console.WriteLine($"{i + 1} {StatutTache.EnAttente}");
                             break;
                         }
                     case 1:
                         {
-                            Console.WriteLine($"{i} {StatutTache.EnCours}");
+                            Console.WriteLine($"{i + 1} {StatutTache.EnCours}");
                             break;
                         }
                     case 2:
                         {
-                            Console.WriteLine($"{i} {StatutTache.Terminee}");
+                            Console.WriteLine($"{i + 1} {StatutTache.Terminee}");
                             break;
                         }
                 }
@@ -163,7 +177,7 @@ namespace ToDoList.Models
             // Modification du statut sur la tâche
             if (_taches.TryGetValue(result, out Tache? value))
             {
-                switch (statut)
+                switch (statut - 1)
                 {
                     case 0:
                         {

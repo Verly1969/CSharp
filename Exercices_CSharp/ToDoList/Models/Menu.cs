@@ -36,6 +36,9 @@ namespace ToDoList.Models
                     Console.WriteLine("\n\tFermeture de l'application\n");
                     break;
                 case 1:
+                    Console.Clear();
+                    Console.WriteLine("Liste des tâches");
+                    Console.WriteLine("================\n");
                     tache.AfficherTaches();
                     Console.WriteLine("Pour continuer, tapez sur une touche ...");
                     Console.ReadLine();
