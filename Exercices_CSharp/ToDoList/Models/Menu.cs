@@ -66,6 +66,8 @@ namespace ToDoList.Models
                 case 5:
                     Console.WriteLine("Rechercher une tâche");
                     Console.WriteLine("====================");
+                    tache.RechercherTache();
+                    AfficheMenu();
                     break;
                 case 6:
                     Console.WriteLine("Afficher les statistiques");

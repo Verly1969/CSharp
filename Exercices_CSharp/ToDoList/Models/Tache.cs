@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 using ToDoList.Enums;
@@ -11,22 +12,23 @@ namespace ToDoList.Models
         private Dictionary<int, Tache> _taches = new Dictionary<int, Tache>();
         private int _key = 1;
         private string _name = string.Empty;
-        private string? _description;
+        private string _description = "Sans description";
         private StatutTache _statut;
         private DateTime _dateDeCreation = DateTime.Now;
 
         public Tache()
         {
-            _taches.Add(_key, new Tache("Sel", new DateTime(2016, 1, 18), "Sel pour Sombreffe"));
+            _taches.Add(_key, new Tache(_key, "Sel", new DateTime(2016, 1, 18), "Sel pour Sombreffe"));
             _key++;
-            _taches.Add(_key, new Tache("Technofutur", new DateTime(2018, 12, 26), "Tutoriel", StatutTache.Terminee));
+            _taches.Add(_key, new Tache(_key, "Technofutur", new DateTime(2018, 12, 26), "Tutoriel", StatutTache.Terminee));
             _key++;
-            _taches.Add(_key, new Tache("CT", new DateTime(2025, 12, 12), "Contrôle technique pour A5", StatutTache.EnCours));
+            _taches.Add(_key, new Tache(_key, "CT", new DateTime(2025, 12, 12), "Contrôle technique pour A5", StatutTache.EnCours));
             _key++;
         }
 
-        public Tache(string titre, DateTime dateDeCreation, string description = "Sans description", StatutTache statut = StatutTache.EnAttente) 
+        public Tache(int key, string titre, DateTime dateDeCreation, string description = "Sans description", StatutTache statut = StatutTache.EnAttente) 
         {
+            _key = key;
             _name = titre;
             _description = description;
             _statut = statut;
@@ -69,7 +71,7 @@ namespace ToDoList.Models
                 _description = "Sans description";
             }
 
-            _taches.Add(_key, new Tache(_name, _dateDeCreation, _description, _statut));
+            _taches.Add(_key, new Tache(_key, _name, _dateDeCreation, _description, _statut));
             _key++;
 
             Console.WriteLine($"La tâche {_name} a bien été ajouté\n");
@@ -172,7 +174,7 @@ namespace ToDoList.Models
                     }
                     cpt++;
                 } while (!int.TryParse(Console.ReadLine(), out statut));
-            } while (statut < 0 || statut > 2);
+            } while (statut < 0 || statut > 3);
 
             // Modification du statut sur la tâche
             if (_taches.TryGetValue(result, out Tache? value))
@@ -200,6 +202,59 @@ namespace ToDoList.Models
             Console.WriteLine($"Le statut de la tâche numéro {result} à bien été modifiée.");
             Console.WriteLine("Pour continuer, tapez sur une touche ...");
             Console.ReadLine();
+        }
+
+        public void RechercherTache()
+        {
+            /*
+             * Demander un mot-clé de recherche
+             * Rechercher dans les titres et descriptions (insensible à la casse)
+             * Afficher toutes les tâches correspondantes
+             */
+            string motCle;
+            string str = "";
+            do
+            {
+                Console.WriteLine("Veuillez entrer un mot-clé pour la recherche ...");
+                motCle = Console.ReadLine()!.ToLower();
+            } while (motCle == null || motCle == "");
+
+            foreach (Tache valeur in _taches.Values)
+            {
+                if (valeur._name.Contains(motCle, StringComparison.OrdinalIgnoreCase) ||
+                    valeur._description.Contains(motCle, StringComparison.OrdinalIgnoreCase))
+                {
+                    str += $"- [{valeur._key}] {valeur._name}:\n   {valeur._description}\n   {valeur._statut}\n   {valeur._dateDeCreation}\n";
+                }
+            }
+
+            /*foreach (KeyValuePair<int, Tache> tache in _taches) 
+            { 
+                if (tache.Value._name.Equals(motCle, StringComparison.OrdinalIgnoreCase) ||
+                    tache.Value._description.Equals(motCle, StringComparison.OrdinalIgnoreCase))
+                {
+                    str += $"- [{tache.Key}] {tache.Value._name}:\n   {tache.Value._description}\n   {tache.Value._statut}\n   {tache.Value._dateDeCreation}\n";
+                }
+            }*/
+
+            Console.WriteLine(str);
+            Console.WriteLine("Pour continuer, tapez sur une touche ...");
+            Console.ReadLine();
+
+        }
+
+        public void AfficherStatistique()
+        {
+            /*
+             * Nombre total de tâches
+             * Nombre de tâches par statut
+             * Pourcentage de tâches terminées
+             * Par exemple:
+             * Total des tâches : 5
+             * En attente : 2 ( 40 % )
+             * En cours : 1 ( 20 % )
+             * Terminées : 2 ( 40 % )
+             */
         }
     }
 }
