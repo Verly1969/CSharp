@@ -5,4 +5,7 @@
   <Folder Name="/Exo_2_Indexeur/">
     <Project Path="Exo_2/Exo_2.csproj" Id="d3a6b26e-1fde-4f5d-aac0-c6f8efb49968" />
   </Folder>
+  <Folder Name="/Exo_delegate/">
+    <Project Path="CarWash/CarWash.csproj" Id="fd3a4046-7793-4017-84eb-f68c198c2b39" />
+  </Folder>
 </Solution>
