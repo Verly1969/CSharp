@@ -72,6 +72,8 @@ namespace ToDoList.Models
                 case 6:
                     Console.WriteLine("Afficher les statistiques");
                     Console.WriteLine("=========================");
+                    tache.AfficherStatistique();
+                    AfficheMenu();
                     break;
                 default:
                     Console.Beep();

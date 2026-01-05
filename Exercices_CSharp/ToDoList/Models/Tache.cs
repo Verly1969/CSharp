@@ -10,6 +10,7 @@ namespace ToDoList.Models
     public class Tache
     {
         private Dictionary<int, Tache> _taches = new Dictionary<int, Tache>();
+        private List<int> _keyList = new List<int>();
         private int _key = 1;
         private string _name = string.Empty;
         private string _description = "Sans description";
@@ -19,14 +20,19 @@ namespace ToDoList.Models
         public Tache()
         {
             _taches.Add(_key, new Tache(_key, "Sel", new DateTime(2016, 1, 18), "Sel pour Sombreffe"));
-            _key++;
+            _keyList.Add(_key);
+            _key = _taches.Count + 1;
+
             _taches.Add(_key, new Tache(_key, "Technofutur", new DateTime(2018, 12, 26), "Tutoriel", StatutTache.Terminee));
-            _key++;
+            _keyList.Add(_key);
+            _key = _taches.Count + 1;
+
             _taches.Add(_key, new Tache(_key, "CT", new DateTime(2025, 12, 12), "Contrôle technique pour A5", StatutTache.EnCours));
-            _key++;
+            _keyList.Add(_key);
+            _key = _taches.Count + 1;
         }
 
-        public Tache(int key, string titre, DateTime dateDeCreation, string description = "Sans description", StatutTache statut = StatutTache.EnAttente) 
+        private Tache(int key, string titre, DateTime dateDeCreation, string description = "Sans description", StatutTache statut = StatutTache.EnAttente) 
         {
             _key = key;
             _name = titre;
@@ -72,7 +78,8 @@ namespace ToDoList.Models
             }
 
             _taches.Add(_key, new Tache(_key, _name, _dateDeCreation, _description, _statut));
-            _key++;
+            _keyList.Add(_key);
+            _key = _taches.Count + 1;
 
             Console.WriteLine($"La tâche {_name} a bien été ajouté\n");
             Console.WriteLine("Pour continuer, tapez sur une touche ...");
@@ -95,7 +102,7 @@ namespace ToDoList.Models
                     }
                     cpt++;
                 } while (!int.TryParse(Console.ReadLine(), out result));
-            } while (result <= 0 || result > _taches.Count);
+            } while (!_keyList.Contains(result));
             
             // Comfirmation
             int comfirm = 0;
@@ -107,6 +114,7 @@ namespace ToDoList.Models
             if (comfirm == 1)
             {
                 _taches.Remove(result);
+                _keyList.Remove(result);
                 Console.WriteLine($"La tâche numéro {result} à bien été supprimée.");
             }
             else
@@ -174,7 +182,7 @@ namespace ToDoList.Models
                     }
                     cpt++;
                 } while (!int.TryParse(Console.ReadLine(), out statut));
-            } while (statut < 0 || statut > 3);
+            } while (statut < 0 || statut > Enum.GetValues<StatutTache>().Length);
 
             // Modification du statut sur la tâche
             if (_taches.TryGetValue(result, out Tache? value))
@@ -255,6 +263,35 @@ namespace ToDoList.Models
              * En cours : 1 ( 20 % )
              * Terminées : 2 ( 40 % )
              */
+
+            TotalTaches();
+            TotalParStatut(StatutTache.EnAttente);
+            TotalParStatut(StatutTache.EnCours);
+            TotalParStatut(StatutTache.Terminee);
+            Console.WriteLine("Pour continuer, tapez sur une touche ...");
+            Console.ReadLine();
+        }
+
+        private void TotalTaches()
+        {
+            Console.WriteLine($"Total des tâches : {_taches.Count}");
+        }
+
+        private void TotalParStatut(StatutTache statut)
+        {
+            int nb = 0;
+            foreach (Tache kvp in _taches.Values)
+            {
+                if (kvp._statut == statut)
+                {
+                    nb++; 
+                }
+            }
+
+            int pourcentage = (int)((double)nb / _taches.Count * 100);
+
+            Console.WriteLine($"{statut} : {nb} ( {pourcentage} % )");
+            
         }
     }
 }
