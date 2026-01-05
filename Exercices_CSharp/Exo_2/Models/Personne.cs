@@ -19,9 +19,9 @@ namespace Exo_2.Models
             {
                 DateTime maintenant = DateTime.Now;
                 // contrôle si majeur
-                if ((maintenant.Year - 18) >= value.Year)
+                if ((maintenant.Year - 18) < value.Year)
                 {
-                    Console.WriteLine("Vous êtes majeur");
+                    Console.WriteLine("Vous êtes mineur");
                 }
 
             }
