@@ -5,6 +5,9 @@
   <Folder Name="/Exo_2_Indexeur/">
     <Project Path="Exo_2/Exo_2.csproj" Id="d3a6b26e-1fde-4f5d-aac0-c6f8efb49968" />
   </Folder>
+  <Folder Name="/Simulation_course_auto/">
+    <Project Path="CourseAuto/CourseAuto.csproj" Id="3762e3e4-2990-4c14-8909-1b43d237d195" />
+  </Folder>
   <Folder Name="/ToDoList/">
     <Project Path="ToDoList/ToDoList.csproj" Id="123ade01-e253-463d-8000-3a28de8869a4" />
   </Folder>
