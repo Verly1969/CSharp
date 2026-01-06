@@ -1,4 +1,4 @@
-﻿#Simulation Course Automobile
+﻿# Simulation Course Automobile
 
 Un ensemble de voitures effectue une course sur un circuit, elles parcourent un nombre de tour donné.
 Le circuit dispose d'une distance par tour exprimée en km.
