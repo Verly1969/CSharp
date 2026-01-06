@@ -12,4 +12,4 @@ La voiture ayant le temps total (somme de tous les temps par tour) le plus bas r
 - [ ] Initialiser le nombre de tours et la distance par tour
 - [ ] Créer les voitures
 - [ ] Effectuer le nombre de tours donné pour toutes les voitures (en affichant le temps au tour de chaque voiture)
-- [x] Trouver la voiture ayant le temps total le plus bas et afficher son Modèle, sa Marque et son temps total
+- [ ] Trouver la voiture ayant le temps total le plus bas et afficher son Modèle, sa Marque et son temps total
