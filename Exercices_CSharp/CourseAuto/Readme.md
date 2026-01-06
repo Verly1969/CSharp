@@ -9,7 +9,7 @@ son tour du circuit.
 La voiture ayant le temps total (somme de tous les temps par tour) le plus bas remporte la victoire.
 
 ##Pour mener à bien cet exercice, Le programme principal devrait ressembler à ceci (à quelques détails près) :
-– [ ] Initialiser le nombre de tours et la distance par tour
-– [ ] Créer les voitures
-– [ ] Effectuer le nombre de tours donné pour toutes les voitures (en affichant le temps au tour de chaque voiture)
-– [ ] Trouver la voiture ayant le temps total le plus bas et afficher son Modèle, sa Marque et son temps total
+- [ ] Initialiser le nombre de tours et la distance par tour
+- [ ] Créer les voitures
+- [ ] Effectuer le nombre de tours donné pour toutes les voitures (en affichant le temps au tour de chaque voiture)
+- [ ] Trouver la voiture ayant le temps total le plus bas et afficher son Modèle, sa Marque et son temps total
